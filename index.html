@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>上海昌智知识产权代理有限公司</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/mstyle.css" />
+	
+
+	<script>
+		$(function(){
+			function imgchange()
+			{
+				var img = $("#title_img").find("img");
+				console.log(img);
+				for(i=0;i<3;i++)
+				{
+					if($(img[i]).hasClass("img_show")){
+						$(img[i]).removeClass("img_show");
+						break;
+					}
+				}
+				i = i+1;
+				console.log(i);
+				if(i==3)
+					i=0;
+				$(img[i]).addClass("img_show");
+			}
+			//setInterval(imgchange,5000);
+
+			function imgpolling()
+			{
+				var polling_time = 3000;
+				var timeout;
+				var img1_left = 0;
+				var imglist = $("#title_img").find("img");
+				var img_w = $(imglist[0]).width();
+				var time1 ;
+				var imgname=["1.jpg","2.jpg","3.jpg"];
+
+				function resetimgcircle()
+				{
+					var cur_src = $(imglist[1]).attr("src");
+					var index = 0;
+					for(i=0;i<3;i++)
+					{
+						if(cur_src.indexOf(imgname[i])>=0)
+						{
+							index=i;
+							break;
+						}
+					}
+					var imgc_list = $(".img_circle").find(".img_c");
+					for(i=0;i<imgc_list.length;i++)
+						$(imgc_list[i]).removeClass("img_c_select");
+					$(imgc_list[index]).addClass("img_c_select");
+				}
+
+				function resetimgsrc(flag)
+				{
+					var curimg_src = "";
+					if(flag==1)
+					{
+						curimg_src = $(imglist[2]).attr("src")
+					}
+					else if(flag==-1)
+					{
+						curimg_src = $(imglist[0]).attr("src")
+					}
+					var imgpath = "";
+					var img_index =0;
+					for(i=0;i<3;i++)
+					{
+						if(curimg_src.indexOf(imgname[i])>=0)
+						{
+							img_index = i;
+							imgpath = curimg_src.substring(0,curimg_src.indexOf(imgname[i]));
+							console.log("imgpath:"+imgpath);
+							break;
+						}
+					}
+					var preimg_i=0;
+					var nextimg_i = 0;
+
+					if(img_index-1<0)
+						preimg_i=2;
+					else
+						preimg_i=(img_index-1);
+					if(img_index+1>2)
+						nextimg_i=0;
+					else
+						nextimg_i=(img_index+1);
+
+
+					$(imglist[0]).attr("src",imgpath+imgname[preimg_i]);
+					$(imglist[0]).attr("style","margin-left:-25%");
+					$(imglist[1]).attr("src",imgpath+imgname[img_index]);
+					$(imglist[1]).attr("style","margin-left:0");
+
+					$(imglist[2]).attr("src",imgpath+imgname[nextimg_i]);
+
+					resetimgcircle();
+				}
+
+				function polling_left()
+				{
+
+					time1=setInterval(function()
+					{
+						if((img_w+img1_left)<=0)
+						{
+							resetimgsrc(1);
+							clearInterval(time1);
+							clearTimeout(timeout);
+							img1_left = 0;
+							timeout = setTimeout(polling_left,polling_time);
+						}
+						else
+						{
+							img1_left-=10;
+							var str = "margin-left:"+img1_left+"px";
+							$(imglist[1]).attr("style",str)
+						}
+
+					},1);
+				}
+				timeout = setTimeout(polling_left,polling_time);
+
+				var x= 0;
+				var y=0;
+				var mleft=0;
+
+				$("#title_img").mousedown(function(event){ 
+					x = event.pageX;
+					y = event.pageY;
+					clearInterval(time1);
+					$("#title_img").mousemove(function(event){
+						mleft = event.pageX-x;
+
+						if(mleft>0)
+						{
+							var img0_mleft=-$(imglist[0]).width()+(mleft);
+							var str2="margin-left:"+img0_mleft+"px";
+							$(imglist[0]).attr("style",str2);
+						}
+						else
+						{
+							var str = "margin-left:"+mleft+"px";
+							$(imglist[1]).attr("style",str);
+						}
+					});
+				});
+				$("#title_img").mouseup(function(event){
+					var newX = event.pageX;
+					$("#title_img").off('mousemove')
+
+					var time2 = setInterval(function(){
+						if(newX<x)
+						{
+							if((img_w+mleft)<=0)
+							{
+								resetimgsrc(1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft-=10;
+								var str = "margin-left:"+mleft+"px";
+
+								$(imglist[1]).attr("style",str)
+							}
+
+						}
+						else if(newX>x)
+						{
+							if(img_w-mleft<=0)
+							{
+								resetimgsrc(-1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft+=10;
+								var img0_mleft=-$(imglist[0]).width()+(mleft);
+								var str2="margin-left:"+img0_mleft+"px";
+								$(imglist[0]).attr("style",str2);
+
+							}
+						}
+
+					},1);
+				});
+			}
+			imgpolling();
+		})
+
+
+	</script>
+
+</head>
+<body>
+	<div style="height: 80px;width: 100%;">
+		<div style="float: left;font-family:KaiTi;font-weight:bold;margin-left: 110px ">
+			<div style="margin-top: 10px;height: 34px;line-height: 35px;">一站式综合服务</div>
+			<div style="margin-bottom:10px ">上海昌智知识产权代理有限公司</div>
+		</div>
+		<div style="float: left;margin-left:100px;">
+			<div class="title_phone" style="height: 40px">
+				<span>TEL:400-886-553</span>
+			</div>
+			<div class="title_bt title_bt_active">
+				<span>首页</span>
+			</div>
+			<div class="dropdown">
+				<a href="./gxrd/"><div class="dropbtn">高薪认定</div></a>
+				<div class="dropdown-content">
+					<a href="./">加计扣除</a>
+				</div>
+			</div>	
+			<div class="title_bt">
+				<a href="./gbrd/"><span>贯标认定</span></a>
+			</div>
+			<div class="dropdown">
+				<div class="dropbtn">知识产权服务</div>
+				<div class="dropdown-content">
+					<a href="./">版权服务</a>
+					<a href="./">商标服务</a>
+				</div>
+			</div>
+			<div class="title_bt">
+				<span>双软认证</span>
+			</div>
+			<div class="title_bt">
+				<span>科技政策扶持</span>
+			</div>	
+			<div class="title_bt">
+				<span>关于我们</span>
+			</div>
+		</div>
+	</div>
+	<div id="t_img">
+		<div id="title_img">
+			<img class="img_n" src="./images/3.jpg" draggable="false" style="margin-left: -25%"/>
+			<img class="img_n" src="./images/1.jpg" draggable="false"/>
+			<img class="img_n" src="./images/2.jpg" draggable="false"/>
+			<img class="img_n" src="./images/3.jpg" draggable="false"/>
+		</div>
+		<div class="img_circle">
+			<a href="./">
+				<div class="img_c img_c_select">
+				</div>
+			</a>
+			<a href="./gbrd/">
+				<div class="img_c"></div>
+			</a>
+			
+			<a href="./zscq/">
+				<div class="img_c" ></div>
+			</a>
+		</div>
+	</div>
+	<div class="zscqfw">
+		<div class="zscqfw_left"> 
+
+
+			<div class="zscqfw_title">
+				<img src="./images/zscqfw/title.jpg" />
+				<span>知识产权服务</span>	
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/1.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>集成电路布图</span>
+				</div>
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/2.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>计算机软件著作权</span>
+				</div>
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/3.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>各类版权</span>
+				</div>
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/4.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>商标注册</span>
+				</div>
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/5.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>商标设计</span>
+				</div>
+			</div>
+			<div class="zscqfw_content">
+				<div class="zscqfw_content_img">
+					<img src="./images/zscqfw/6.jpg"/>
+				</div>
+				<div class="zscqfw_content_span">
+					<span>商标续展</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="kjzcfc">
+		<div class="kjzcfc_title">
+			<span>科技政策扶持</span>
+		</div>
+		<div class="k_left">
+			<div class="k_left_content">
+				<div class="k_text_1">
+					<span>专属担保注册
+					</span>
+				</div>
+				<div class="k_text_2">
+					<span>专属担保注册,不成功退全款(含官费)
+					</span>
+				</div>
+				<div class="k_bt_1">
+					<span>了解详情
+					</span>
+				</div>
+				<div class="k_img">
+					<img src="./images/k1.jpg" />
+				</div>
+			</div>
+		</div>
+		<div class="k_right">
+			<div class="k_right_content">
+				<div class="k_r_div">
+					<div class="k_r_t_div" >
+						<div style="margin-left: 0px;"></div>
+					</div>
+					<div class="k_r_t_div">
+						<div></div>
+					</div>
+					<div class="k_r_t_div" >
+						<div style="margin-right: 0px;"></div>
+					</div>
+				</div>
+				<div class="k_r_div">
+					<div class="k_r_b_div" >
+						<div style="margin-left: 0px;"></div>
+					</div>
+					<div class="k_r_b_div">
+						<div></div>
+					</div>
+					<div class="k_r_b_div" >
+						<div style="margin-right: 0px;"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="sb_process">
+		<div class="sb_process_text">
+			<span>申报流程</span>
+		</div>
+		<div >
+			<img style="width: 100%;" src="./images/p1.jpg" />
+		</div>
+	</div>
+	<div class="server">
+		<div class="server_text">
+			<span>服务优势</span>
+		</div>
+		<div class="server_div">
+			<div class="server_img">
+				<img   src="./images/s1.png" />
+			</div>
+			<div class="server_t1">
+				<span >服务标准</span>
+			</div>
+			<div class="server_t2">
+				<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
+			</div>
+		</div>
+		<div class="server_div">
+			<div class="server_img">
+				<img   src="./images/s1.png" />
+			</div>
+			<div class="server_t1">
+				<span >服务标准</span>
+			</div>
+			<div class="server_t2">
+				<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
+			</div>
+		</div>
+		<div class="server_div">
+			<div class="server_img">
+				<img   src="./images/s1.png" />
+			</div>
+			<div class="server_t1">
+				<span >服务标准</span>
+			</div>
+			<div class="server_t2">
+				<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
+			</div>
+		</div>
+		<div class="server_div">
+			<div class="server_img">
+				<img   src="./images/s1.png" />
+			</div>
+			<div class="server_t1">
+				<span >服务标准</span>
+			</div>
+			<div class="server_t2">
+				<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

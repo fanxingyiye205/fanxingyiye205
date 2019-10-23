@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>上海昌智知识产权代理有限公司</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script src="./../js/jquery-2.1.4.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="./../css/mstyle.css" />
+
+	<script>
+		$(function(){
+			function imgchange()
+			{
+				var img = $("#title_img").find("img");
+				console.log(img);
+				for(i=0;i<3;i++)
+				{
+					if($(img[i]).hasClass("img_show")){
+						$(img[i]).removeClass("img_show");
+						break;
+					}
+				}
+				i = i+1;
+				
+				if(i==3)
+					i=0;
+				$(img[i]).addClass("img_show");
+			}
+			//setInterval(imgchange,5000);
+
+			function imgpolling()
+			{
+				var polling_time = 3000;
+				var timeout;
+				var img1_left = 0;
+				var imglist = $("#title_img").find("img");
+				var img_w = $(imglist[0]).width();
+				var time1 ;
+				var imgname=["1.jpg","2.jpg","3.jpg"];
+
+				function resetimgcircle()
+				{
+					var cur_src = $(imglist[1]).attr("src");
+					var index = 0;
+					for(i=0;i<3;i++)
+					{
+						if(cur_src.indexOf(imgname[i])>=0)
+						{
+							index=i;
+							break;
+						}
+					}
+					var imgc_list = $(".img_circle").find(".img_c");
+					for(i=0;i<imgc_list.length;i++)
+						$(imgc_list[i]).removeClass("img_c_select");
+					$(imgc_list[index]).addClass("img_c_select");
+				}
+
+				function resetimgsrc(flag)
+				{
+					var curimg_src = "";
+					if(flag==1)
+					{
+						curimg_src = $(imglist[2]).attr("src")
+					}
+					else if(flag==-1)
+					{
+						curimg_src = $(imglist[0]).attr("src")
+					}
+					var imgpath = "";
+					var img_index =0;
+					for(i=0;i<3;i++)
+					{
+						if(curimg_src.indexOf(imgname[i])>=0)
+						{
+							img_index = i;
+							imgpath = curimg_src.substring(0,curimg_src.indexOf(imgname[i]));
+							console.log("imgpath:"+imgpath);
+							break;
+						}
+					}
+					var preimg_i=0;
+					var nextimg_i = 0;
+
+					if(img_index-1<0)
+						preimg_i=2;
+					else
+						preimg_i=(img_index-1);
+					if(img_index+1>2)
+						nextimg_i=0;
+					else
+						nextimg_i=(img_index+1);
+
+
+					$(imglist[0]).attr("src",imgpath+imgname[preimg_i]);
+					$(imglist[0]).attr("style","margin-left:-25%");
+					$(imglist[1]).attr("src",imgpath+imgname[img_index]);
+					$(imglist[1]).attr("style","margin-left:0");
+
+					$(imglist[2]).attr("src",imgpath+imgname[nextimg_i]);
+
+					resetimgcircle();
+				}
+
+				function polling_left()
+				{
+
+					time1=setInterval(function()
+					{
+						if((img_w+img1_left)<=0)
+						{
+							resetimgsrc(1);
+							clearInterval(time1);
+							clearTimeout(timeout);
+							img1_left = 0;
+							timeout = setTimeout(polling_left,polling_time);
+						}
+						else
+						{
+							img1_left-=10;
+							var str = "margin-left:"+img1_left+"px";
+							$(imglist[1]).attr("style",str)
+						}
+
+					},1);
+				}
+				timeout = setTimeout(polling_left,polling_time);
+
+				var x= 0;
+				var y=0;
+				var mleft=0;
+
+				$("#title_img").mousedown(function(event){ 
+					x = event.pageX;
+					y = event.pageY;
+					clearInterval(time1);
+					$("#title_img").mousemove(function(event){
+						mleft = event.pageX-x;
+
+						if(mleft>0)
+						{
+							var img0_mleft=-$(imglist[0]).width()+(mleft);
+							var str2="margin-left:"+img0_mleft+"px";
+							$(imglist[0]).attr("style",str2);
+						}
+						else
+						{
+							var str = "margin-left:"+mleft+"px";
+							$(imglist[1]).attr("style",str);
+						}
+					});
+				});
+				$("#title_img").mouseup(function(event){
+					var newX = event.pageX;
+					$("#title_img").off('mousemove')
+
+					var time2 = setInterval(function(){
+						if(newX<x)
+						{
+							if((img_w+mleft)<=0)
+							{
+								resetimgsrc(1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft-=10;
+								var str = "margin-left:"+mleft+"px";
+
+								$(imglist[1]).attr("style",str)
+							}
+
+						}
+						else if(newX>x)
+						{
+							if(img_w-mleft<=0)
+							{
+								resetimgsrc(-1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft+=10;
+								var img0_mleft=-$(imglist[0]).width()+(mleft);
+								var str2="margin-left:"+img0_mleft+"px";
+								$(imglist[0]).attr("style",str2);
+
+							}
+						}
+
+					},1);
+				});
+			}
+			imgpolling();
+		})
+	</script>
+
+</head>
+<body>
+	<div style="height: 80px;width: 100%;">
+		<div style="float: left;font-family:KaiTi;font-weight:bold;margin-left: 110px ">
+			<div style="margin-top: 10px;height: 34px;line-height: 35px;">一站式综合服务</div>
+			<div style="margin-bottom:10px ">上海昌智知识产权代理有限公司</div>
+		</div>
+		<div style="float: left;margin-left:100px;">
+			<div class="title_phone" style="height: 40px">
+				<span>TEL:400-886-553</span>
+			</div>
+			<div class="title_bt">
+				<a href="./../"><span>首页</span></a>
+			</div>
+			<div class="dropdown">
+				<a href="./../gxrd/"><div class="dropbtn">高薪认定</div></a>
+				<div class="dropdown-content">
+					<a href="./">加计扣除</a>
+				</div>
+			</div>	
+			<div class="title_bt title_bt_active">
+				<a href="./../gbrd/"><span>贯标认定</span></a>
+			</div>
+			<div class="dropdown">
+				<div class="dropbtn">知识产权服务</div>
+				<div class="dropdown-content">
+					<a href="./">版权服务</a>
+					<a href="./">商标服务</a>
+				</div>
+			</div>
+			<div class="title_bt">
+				<span>双软认证</span>
+			</div>
+			<div class="title_bt">
+				<span>科技政策扶持</span>
+			</div>	
+			<div class="title_bt">
+				<span>关于我们</span>
+			</div>
+		</div>
+	</div>
+
+<div id="t_img">
+		<div id="title_img">
+			<img class="img_n" src="./../images/3.jpg" draggable="false" style="margin-left: -25%"/>
+			<img class="img_n" src="./../images/1.jpg" draggable="false"/>
+			<img class="img_n" src="./../images/2.jpg" draggable="false"/>
+			<img class="img_n" src="./../images/3.jpg" draggable="false"/>
+		</div>
+		<div class="img_circle">
+			<a href="./../">
+				<div class="img_c img_c_select">
+				</div>
+			</a>
+			<a href="./../gbrd/">
+				<div class="img_c"></div>
+			</a>
+			
+			<a href="./../zscq/">
+				<div class="img_c" ></div>
+			</a>
+		</div>
+
+	<div class="gbrd_hc">
+		<div class="gbrd_hc_title">
+			<span>知识产权管理体系贯标8大好处</span>
+		</div>
+		<div class="gbrd_hc_context">
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/01.png"/>
+				</div>
+				<div class="gj_text">
+					<span>拨款资助</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/02.png"/>
+				</div>
+				<div class="gj_text">
+					<span>高企认证的重要参考条件</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/03.png"/>
+				</div>
+				<div class="gj_text">
+					<span>入围政府采购名单，优先享受政府购买服务</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/04.png"/>
+				</div>
+				<div class="gj_text">
+					<span>申请高级别自制项目的必须条件</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/05.png"/>
+				</div>
+				<div class="gj_text">
+					<span>鼓励大企业优先采购认证企业产品</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/06.png"/>
+				</div>
+				<div class="gj_text">
+					<span>承研承制单位必须体系认证</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/07.png"/>
+				</div>
+				<div class="gj_text">
+					<span>帮助企业建立知识产权绩效管理体系</span>
+				</div>
+			</div>
+			<div class="gj_context">
+				<div class="gj_img">
+					<img src="./../images/gxjs/08.png"/>
+				</div>
+				<div class="gj_text">
+					<span>确保企业员工对知识产权方针和目标理解</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="gbrd_fw">
+		<div class="gbrd_hc_title">
+			<span>我们的服务</span>
+		</div>
+		<div class="gbrd_fw_content">
+			<div class="fw_left">
+				<img class="fw_left_img" src="./../images/gbrd/fw1.png"/>
+				<div class="fw_left_text">
+					<span >贯标申请基础服务</span>
+				</div>
+			</div>
+			<div class="fw_center">
+				<span class="fw_c_item">服务特色</span>
+				<span class="fw_c_i2">每个项目配备专属专家团队提供专业认证辅导</span>
+				<div class="fw_c_desc">
+					<span class="fw_c_item">服务清单</span>
+					<div class="fw_c_list">
+						<span class="fw_c_i3"><em class="fw_c_i_em">1</em>贯标启动（上门1次）</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">5</em>认证申请</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">2</em>体系文件编写</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">6</em>文审整改</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">3</em>运行辅导（上门1次）</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">7</em>模拟审核（上门1次）</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">4</em>内审管评（上门1次）</span>
+						<span class="fw_c_i3"><em class="fw_c_i_em">8</em>不符合整改</span>
+					</div>
+				</div>
+				<span class="fw_c_item">适用对象</span>
+				<span class="fw_c_i2">凡是希望强化知识产权管理的大中小微企业均可申请</span>
+			</div>
+			<div class="fw_right">
+				<button class="fw_r_bt" type="button">免费询问</button>
+			</div>
+		</div>
+	</div>
+	<div class="gbrd_fw_p">
+		<div class="gbrd_fw_p_title">
+			<span>知识产权贯标具体服务流程</span>
+		</div>
+		<div class="gbrd_fw_p_content">
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p1.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>启动培训会议</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>成立专家项目组，筹备指导启动会</span>
+				</div>
+			</div>
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p2.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>现场调查诊断</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>入驻企业内部调查，出具诊断报告文件</span>
+				</div>
+			</div>
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p3.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>管理体系建设</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>协助构建管理体系，知道编撰体系文件</span>
+				</div>
+			</div>
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p4.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>试运行管理体系</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>知道培训企业员工，协助企业实施运行</span>
+				</div>
+			</div>
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p5.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>内审/管评</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>开展企业内部评审，及时协助解决问题</span>
+				</div>
+			</div>
+			<div class="fw_p_item">
+				<img class="" src="./../images/gbrd/p6.jpg" />
+				
+				<div class="fw_p_i_t1">
+					<span>贯标认证</span>
+				</div>
+				<div class="fw_p_i_line"></div>
+				<div class="fw_p_i_t2">
+					<span>为企业建立快速认证通道，帮助认证直至成功</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="gbrd_cmp">
+		<div class="gbrd_cmp_title">
+			<span>企业知识产权<p>贯标前后对比</p></span>
+		</div>
+	</div>
+</body>
+</html>
