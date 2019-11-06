@@ -1283,3 +1283,49 @@ h5{
 	width: 100%;
 	clear: both;
 }
+
+ .fw_proc
+ {
+ 	clear: both;
+ 	width:1080px;
+ 	margin:20px auto;
+ }
+ .fw_proc_title
+ {
+ 	text-align: center;
+
+ }
+ .fw_proc_title span
+ {
+ 	font-size: 24px;
+ }
+ .fw_proc_content
+ {
+ 	height: 120px;
+ 	margin: 20px auto;
+ }
+ .fw_proc_c1
+ {
+ 	float: left;
+ 	width: 12%;
+ 	text-align: center;
+ 	height: 120px;
+ }
+ .fw_proc_img
+ {
+ 	height: 100px;
+ 	margin: 0 auto;
+ }
+ .fw_proc_c2
+ {
+ 	float: left;
+ 	width: 10%;
+ 	text-align: center;
+ 	font-size: 32px;
+ 	margin: 0 auto;
+ 	height: 120px;
+ }
+ .fw_proc_c2 span
+ {
+ 	margin-top:20px; 
+ }
