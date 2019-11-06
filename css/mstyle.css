@@ -52,6 +52,7 @@ body{
 .zscqfw{
 	width: 1180px;
 	margin: 20px auto;
+	height: 550px;
 }
 .zscqfw_title
 {
@@ -77,9 +78,9 @@ body{
 }
 .zscqfw_left
 {
-	height: 500px;
+	height: 550px;
 	width: 1020px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 .zscqfw_content
 {
@@ -599,7 +600,7 @@ a{
 	max-width: 610px;
 	text-align: left;
 	float: left;
-	width: 55%;
+	width: 58%;
 }
 .fw_c_item
 {
@@ -610,7 +611,7 @@ a{
 	line-height: 41px;
 	text-align: center;
 	color: #fff;
-	background: url(/Web/new/fanxingyiye205.github.io/images/gbrd/fw2.png) center no-repeat;
+	background: url(./../images/gbrd/fw2.png) center no-repeat;
 	font-size: 18px;
 }
 .fw_c_i2
@@ -621,7 +622,7 @@ a{
 .fw_c_list
 {
 	display: inline-block;
-	width: 458px;
+	width: 450px;
 	vertical-align: -117px;
 }
 .fw_c_desc
@@ -632,7 +633,7 @@ a{
 {
 	display: inline-block;
 	margin-bottom: 15px;
-	width: 226px;
+	width: 220px;
 	font-size: 16px;
 	color: #575757;
 }
@@ -716,9 +717,10 @@ a{
 }
 .gbrd_cmp
 {
-	margin: 10px auto;
-	width: 1080px;
+	margin: 20px auto;
+	width: 900px;
 	text-align: center;
+	height: 370px;
 }
 .gbrd_cmp_title
 {
@@ -734,6 +736,40 @@ a{
 	color: #ff733c;
 	display: inline-block;
 	margin: 0;
+}
+.gbrd_cmp_l
+{
+	text-align: center;
+	width: 50%;
+	background-color: #333;
+	color: #EEE; 
+	float: left;
+	margin: 20px auto;
+}
+.gbrd_cmp_r
+{
+	text-align: center;
+	width: 50%;
+	background-color: #A80000;
+	color: #EEE; 
+	float: left;
+	margin: 20px auto;
+}
+.gbrd_cmp_text1
+{
+	margin: 20px auto;
+}
+.gbrd_cmp_text1 span
+{
+	font-size: 24px;
+}
+.gbrd_cmp_text2
+{
+	margin: 10px auto;
+}
+.gbrd_cmp_text2 span
+{
+	font-size: 18px; 
 }
 .become_wrap
 {
@@ -1278,17 +1314,27 @@ h5{
 }
 .fotter
 {
-	height: 200px;
-	background: #363b3f;
+	height: 160px;
+	background: #030000;
 	width: 100%;
 	clear: both;
+	padding-top: 40px;
 }
+.fotter_1,.fotter_2,.fotter_3
+{
+	margin: 5px auto;
+	text-align: center;
+	font-size:14px;
+	color: #fff;
+
+}
+
 
  .fw_proc
  {
  	clear: both;
- 	width:1080px;
- 	margin:20px auto;
+ 	width:1020px;
+ 	margin:30px auto;
  }
  .fw_proc_title
  {
@@ -1313,8 +1359,8 @@ h5{
  }
  .fw_proc_img
  {
- 	height: 100px;
- 	margin: 0 auto;
+ 	height: 60px;
+ 	margin: 10px auto;
  }
  .fw_proc_c2
  {
@@ -1322,10 +1368,40 @@ h5{
  	width: 10%;
  	text-align: center;
  	font-size: 32px;
- 	margin: 0 auto;
- 	height: 120px;
+ 	margin: 20px auto;
+ 	/*height: 120px;*/
  }
  .fw_proc_c2 span
  {
  	margin-top:20px; 
+ }
+ .cj_quest
+ {
+ 	width:1180px;
+ 	margin: 20px auto;
+ }
+ .cj_quest_title
+ {
+ }
+ .cj_quest_title span
+ {
+ 	font-size: 24px;
+ }
+ .cj_quest_q
+ {
+ 	margin: 20px auto;
+ }
+ .cj_quest_a
+ {
+ 	margin: 10px auto;
+ }
+ .cj_quest_q span
+ {
+ 	font-size: 18px;
+ 	color: #FF0000;
+ 	
+ }
+ .cj_quest_a span
+ {
+ 	font-size: 16px;
  }
