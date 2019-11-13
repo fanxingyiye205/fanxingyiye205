@@ -1379,6 +1379,7 @@ h5{
  {
  	width:1180px;
  	margin: 20px auto;
+ 	clear: both;
  }
  .cj_quest_title
  {
@@ -1394,6 +1395,7 @@ h5{
  .cj_quest_a
  {
  	margin: 10px auto;
+ 	line-height: 36px;
  }
  .cj_quest_q span
  {
@@ -1404,4 +1406,176 @@ h5{
  .cj_quest_a span
  {
  	font-size: 16px;
+ }
+ .gx_proc
+ {
+ 	width: 1180px;
+ 	margin: 20px auto;
+ 	text-align: center;
+ 	clear: both;
+ 	height: 400px;
+ }
+ .gx_proc_title
+ {
+ 	margin: 20px auto;
+ }
+ .gx_proc_title span
+ {
+ 	font-size: 32px;
+ }
+ .gx_proc_content
+ {
+ }
+ .gx_proc_img
+ {
+ 	background:url(./../images/gxjs/proc.png);
+ 	height: 159px;
+ 	width: 1122px;
+ 	margin: 0 auto;
+ 	background-size: 100%;
+ }
+ .gx_proc_text
+ {
+ 	width: 20%;
+ 	float: left;
+ 	text-align: center;
+ 	margin: 5px auto;
+ }
+ .gx_proc_text1
+ {
+ 	color:#005293;
+ 	font-size: 18px;
+ 	height: 60px;
+ 	line-height: 25px;
+ }
+ .gx_proc_text2
+ {
+ 	font-size: 18px;
+ 	color: #666666;
+ 	margin-top:10px;
+
+ }
+
+.item_content
+{
+	width: 1180px;
+	text-align: center;
+	clear: both;
+	margin: 20px auto;
+}
+.item_l
+{
+	float: left;
+	width: 15%;
+
+}
+.item_l ul
+{
+	padding: 0;
+	margin:0;
+}
+.item_l li
+{
+	width: 100%;
+}
+.item_l a
+{
+	list-style: none;
+	height: 39px;
+	line-height: 39px;
+	width: 100%;
+	display: block;
+	padding: 0 2px; 
+	border-bottom: 1px solid #1f90c8; 
+}
+.item_l a:hover
+{
+	background-color: #00AAFF;
+	color: #FFF;
+}
+
+.item_r
+{
+	float: left;
+	width: 85%;
+	padding: 0px 20px; 
+}
+.item_li1
+{
+	font-size: 18px;
+	text-align: right;
+	list-style: none;
+	cursor: pointer;
+	margin:0px;
+	padding: 0px;
+}
+.item_ul2
+{
+	width: 100%;
+}
+
+.item_ul2 li
+{
+	font-size: 16px;
+	text-align: right;
+	list-style: none;
+	cursor: pointer;
+	width: 100%;
+	margin:0px 0px;
+	padding: 0px 0px;
+	
+
+}
+
+.item_ul2 li a
+{
+
+	padding: 0 10px;
+
+}
+
+ #item_ul ul
+ {
+ 	display: none;
+ 	margin:0px;
+	padding: 0px;
+ }
+
+ .item_r_title
+ {
+ 	border-bottom: 1px dotted #aaa;
+ }
+
+ .item_r_title span
+ {
+ 	text-align: center;
+    font-weight: normal;
+    font-size: 24px;
+    color: #222;
+    line-height: 65px;
+    
+    margin-bottom: 18px;
+    width: 100%;
+ }
+ .item_r_content p
+ {
+ 	line-height: 1.5em;
+ 	font-size: 16px;
+ 	text-align: left;
+ 	color: #666;
+ 	margin: 5px 0; 
+
+ }
+ .span_red
+ {
+ 	color: #ff0000;
+ }
+ .cp_2 
+ {
+ 	text-indent: 32px;
+ }
+ #list_01, #list_02,#list_03
+ {
+ 	display: none;
+ 	margin-bottom: 50px; 
  }

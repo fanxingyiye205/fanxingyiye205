@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>上海昌智知识产权代理有限公司</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script src="./../js/jquery-2.1.4.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="./../css/mstyle.css" />
+
+	<script>
+		$(function(){
+			function imgchange()
+			{
+				var img = $("#title_img").find("img");
+				console.log(img);
+				for(i=0;i<3;i++)
+				{
+					if($(img[i]).hasClass("img_show")){
+						$(img[i]).removeClass("img_show");
+						break;
+					}
+				}
+				i = i+1;
+				console.log(i);
+				if(i==3)
+					i=0;
+				$(img[i]).addClass("img_show");
+			}
+			//setInterval(imgchange,5000);
+
+			function imgpolling()
+			{
+				var polling_time = 3000;
+				var timeout;
+				var img1_left = 0;
+				var imglist = $("#title_img").find("img");
+				var img_w = $(imglist[0]).width();
+				var time1 ;
+				var imgname=["1.jpg","2.jpg","3.jpg"];
+
+				function resetimgcircle()
+				{
+					var cur_src = $(imglist[1]).attr("src");
+					var index = 0;
+					for(i=0;i<3;i++)
+					{
+						if(cur_src.indexOf(imgname[i])>=0)
+						{
+							index=i;
+							break;
+						}
+					}
+					var imgc_list = $(".img_circle").find(".img_c");
+					for(i=0;i<imgc_list.length;i++)
+						$(imgc_list[i]).removeClass("img_c_select");
+					$(imgc_list[index]).addClass("img_c_select");
+				}
+
+				function resetimgsrc(flag)
+				{
+					var curimg_src = "";
+					if(flag==1)
+					{
+						curimg_src = $(imglist[2]).attr("src")
+					}
+					else if(flag==-1)
+					{
+						curimg_src = $(imglist[0]).attr("src")
+					}
+					var imgpath = "";
+					var img_index =0;
+					for(i=0;i<3;i++)
+					{
+						if(curimg_src.indexOf(imgname[i])>=0)
+						{
+							img_index = i;
+							imgpath = curimg_src.substring(0,curimg_src.indexOf(imgname[i]));
+							console.log("imgpath:"+imgpath);
+							break;
+						}
+					}
+					var preimg_i=0;
+					var nextimg_i = 0;
+
+					if(img_index-1<0)
+						preimg_i=2;
+					else
+						preimg_i=(img_index-1);
+					if(img_index+1>2)
+						nextimg_i=0;
+					else
+						nextimg_i=(img_index+1);
+
+
+					$(imglist[0]).attr("src",imgpath+imgname[preimg_i]);
+					$(imglist[0]).attr("style","margin-left:-25%");
+					$(imglist[1]).attr("src",imgpath+imgname[img_index]);
+					$(imglist[1]).attr("style","margin-left:0");
+
+					$(imglist[2]).attr("src",imgpath+imgname[nextimg_i]);
+
+					resetimgcircle();
+				}
+
+				function polling_left()
+				{
+
+					time1=setInterval(function()
+					{
+						if((img_w+img1_left)<=0)
+						{
+							resetimgsrc(1);
+							clearInterval(time1);
+							clearTimeout(timeout);
+							img1_left = 0;
+							timeout = setTimeout(polling_left,polling_time);
+						}
+						else
+						{
+							img1_left-=10;
+							var str = "margin-left:"+img1_left+"px";
+							$(imglist[1]).attr("style",str)
+						}
+
+					},1);
+				}
+				timeout = setTimeout(polling_left,polling_time);
+
+				var x= 0;
+				var y=0;
+				var mleft=0;
+
+				$("#title_img").mousedown(function(event){ 
+					x = event.pageX;
+					y = event.pageY;
+					clearInterval(time1);
+					$("#title_img").mousemove(function(event){
+						mleft = event.pageX-x;
+
+						if(mleft>0)
+						{
+							var img0_mleft=-$(imglist[0]).width()+(mleft);
+							var str2="margin-left:"+img0_mleft+"px";
+							$(imglist[0]).attr("style",str2);
+						}
+						else
+						{
+							var str = "margin-left:"+mleft+"px";
+							$(imglist[1]).attr("style",str);
+						}
+					});
+				});
+				$("#title_img").mouseup(function(event){
+					var newX = event.pageX;
+					$("#title_img").off('mousemove')
+
+					var time2 = setInterval(function(){
+						if(newX<x)
+						{
+							if((img_w+mleft)<=0)
+							{
+								resetimgsrc(1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft-=10;
+								var str = "margin-left:"+mleft+"px";
+
+								$(imglist[1]).attr("style",str)
+							}
+
+						}
+						else if(newX>x)
+						{
+							if(img_w-mleft<=0)
+							{
+								resetimgsrc(-1);
+								clearInterval(time2);
+								clearTimeout(timeout);
+								timeout = setTimeout(polling_left,polling_time);
+							}
+							else
+							{
+								mleft+=10;
+								var img0_mleft=-$(imglist[0]).width()+(mleft);
+								var str2="margin-left:"+img0_mleft+"px";
+								$(imglist[0]).attr("style",str2);
+
+							}
+						}
+
+					},1);
+				});
+			}
+
+		imgpolling();
+
+		function item_list()
+			{
+				var item_ul = $("#item_ul");
+				var item_li1 = $("#item_ul").find(".item_li1");
+				for(var i = 0;i<item_li1.length;i++)
+				{
+					$(item_li1[i]).click(function(){
+						$("#item_ul").find("ul").hide();
+						if($(this).find("ul").length>0)
+						{
+							$(this).find("ul").show();
+						}
+						else
+						{
+							console.log("none");
+						}
+						
+						
+						
+					});
+					
+				}
+			}
+			item_list();
+
+			
+			$(".item_l").find("a").click(function(){
+				var href = $(this).attr("href");
+				if(href)
+				{
+					var id = href.substr(href.lastIndexOf("#"));
+					$(".item_r").children("div").hide();
+					$(id).show();
+				}
+				
+				
+			});
+
+		});
+	
+		function showlist()
+		{
+				var url = window.location.hash;
+				console.log(url);
+
+				$(function(){
+					$(url).show();
+					//console.log($(url));
+					});
+
+		}
+		
+		showlist();
+	</script>
+
+</head>
+<body>
+	<div style="height: 80px;width: 100%;">
+		<div style="float: left;font-family:KaiTi;font-weight:bold;margin-left: 110px ">
+			<div style="margin-top: 10px;height: 34px;line-height: 35px;">一站式综合服务</div>
+			<div style="margin-bottom:10px ">上海昌智知识产权代理有限公司</div>
+		</div>
+		<div style="float: left;margin-left:100px;">
+			<div class="title_phone" style="height: 40px">
+				<span>TEL:400-886-553</span>
+			</div>
+			<div class="title_bt">
+				<a href="./../"><span>首页</span></a>
+			</div>
+			<div class="dropdown">
+				<a href="./../gxrd/"><div class="dropbtn">高薪认定</div></a>
+				<div class="dropdown-content">
+					<a href="./">加计扣除</a>
+				</div>
+			</div>	
+			<div class="title_bt">
+				<a href="./../gbrd"><span>贯标认定</span></a>
+			</div>
+			<div class="dropdown">
+				<a href="./../zscq"><div class="dropbtn">知识产权服务</div></a>
+				<div class="dropdown-content">
+					<a href="./">版权服务</a>
+					<a href="./">商标服务</a>
+				</div>
+			</div>
+			<div class="title_bt">
+				<span>双软认证</span>
+			</div>
+			<div class="title_bt">
+				<span>科技政策扶持</span>
+			</div>	
+			<div class="title_bt title_bt_active">
+				<span>关于我们</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="t_img">
+		<div id="title_img">
+			<img class="img_n" src="./../images/3.jpg" draggable="false" style="margin-left: -25%"/>
+			<img class="img_n" src="./../images/1.jpg" draggable="false"/>
+			<img class="img_n" src="./../images/2.jpg" draggable="false"/>
+			<img class="img_n" src="./../images/3.jpg" draggable="false"/>
+		</div>
+		<div class="img_circle">
+			<a href="./../">
+				<div class="img_c img_c_select">
+				</div>
+			</a>
+			<a href="./../gbrd/">
+				<div class="img_c"></div>
+			</a>
+			
+			<a href="./../zscq/">
+				<div class="img_c" ></div>
+			</a>
+		</div>
+	</div>
+	<div class="item_content">
+		<div class="item_title">
+		</div>
+		<div class="item_l">
+			<ul id="item_ul">
+				<li class="item_li1"><a href="./index.html#list_01">高薪企业认定 &nbsp;〉</a></li>
+				<li class="item_li1"><a>政府资助 &nbsp;〉</a>
+					<ul class="item_ul2">
+						<li><a href="./index.html#list_02">创客资助 &nbsp;〉</a>
+						</li>
+						<li><a href="./index.html#list_03">创业资助 &nbsp;〉</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="item_r">
+			<div id="list_01">
+				<div class="item_r_title">
+					<span>高新技术企业认定</span>
+				</div>
+				<div class="item_r_content">
+					<p>国家高新技术企业又称国家级高新技术企业，根据《高新技术企业认定管理办法》规定，国家高新技术企业是指在《国家重点支持的高新技术领域》内，持续进行研究开发与技术成果转化，形成企业核心自主知识产权，并以此为基础开展经营活动，在中国境内（不包括港、澳、台地区）注册一年以上的居民企业。深圳地区的科技型成长型企业，也可申请深圳高新技术企业认定。 如果企业申请的国家高新企业认定或者深圳高新企业认定超过三年时间，可以进行申请高新复审。</p>
+				</div>
+			</div>
+			<div id="list_02">
+				<div class="item_r_title">
+					<span>创客资助</span>
+				</div>
+				<div class="item_r_content">
+					<p> 一、创客创业资助审批内容</p>
+					<p class="cp_2">中国创新创业大赛、中国（深圳）创新创业大赛、全国农业科技创新创业大赛竞赛等优胜者在深圳实施竞赛项目的资助以及创客企业的资助</p>
+				</div>
+			</div>
+			<div id="list_03">
+				<div class="item_r_title">
+					<span>创业资助</span>
+				</div>
+				<div class="item_r_content">
+					<p><b>创业资助金额：</b></p>
+					<p class="cp_2">单个项目资助最高不超过<span class="span_red">100万</span>。</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="fotter">
+		<div class="fotter_1">
+			<span>版权所有 上海昌智知识产权代理有限公司 ©2012,Shanghai ChangZhi</span>
+		</div>
+		<div class="fotter_2">
+			<span>电话：4007-886-553　手机：15900978134　沪ICP备12023472号　</span>
+		</div>
+		<div class="fotter_3">
+			<span>上海市长宁区中山西路1265弄18号湘江大厦1405室</span>
+		</div>
+	</div>
+</body>
+</html>
