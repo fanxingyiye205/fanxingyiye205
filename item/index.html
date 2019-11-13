@@ -209,10 +209,13 @@
 				for(var i = 0;i<item_li1.length;i++)
 				{
 					$(item_li1[i]).click(function(){
-						$("#item_ul").find("ul").hide();
+						//console.log("click  ");
+						//$("#item_ul").find("ul").hide();
 						if($(this).find("ul").length>0)
 						{
 							$(this).find("ul").show();
+							
+							
 						}
 						else
 						{
@@ -235,6 +238,10 @@
 					var id = href.substr(href.lastIndexOf("#"));
 					$(".item_r").children("div").hide();
 					$(id).show();
+					var a = $(".item_l").find("a");
+					for(var i=0;i<a.length;i++)
+						$(a[i]).removeClass("item_r_a_active");
+					$(this).addClass("item_r_a_active");
 				}
 				
 				

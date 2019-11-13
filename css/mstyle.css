@@ -1493,12 +1493,18 @@ h5{
 	background-color: #00AAFF;
 	color: #FFF;
 }
+.item_r_a_active
+{
+	background-color: #00AAFF;
+	color: #FFF;
+}
 
 .item_r
 {
 	float: left;
 	width: 85%;
 	padding: 0px 20px; 
+	min-height: 300px;
 }
 .item_li1
 {
@@ -1520,10 +1526,10 @@ h5{
 	text-align: right;
 	list-style: none;
 	cursor: pointer;
-	width: 100%;
+	width: 80%;
 	margin:0px 0px;
 	padding: 0px 0px;
-	
+	margin-left: 36px; 
 
 }
 
