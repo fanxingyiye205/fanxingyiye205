@@ -181,6 +181,25 @@ $(function(){
 
 	})
 
+	function item_select(hash)
+	{
+		var li_a = $("#item_ul").find("a");
+		var cur_lia = "a[href='"+hash+"']";
+		for(i=0;i<li_a.length;i++)
+		{
+			console.log($(li_a[i]).attr("href"));
+			if($(li_a[i]).attr("href")==hash)
+			{
+				var parent = $(li_a[i]).parents(".item_ul2");
+
+				$(parent).show();
+				$(li_a[i]).addClass("item_r_a_active");
+
+
+			}
+		}
+	}
+
 	var pageArray=["#home","#zscq","#zscq_sbfw","#xmsb","#gxrd","#gbrd","#item"];
 	$(".title").find("a").click(function(){
 		var parent = $(this).parent();
@@ -212,7 +231,10 @@ $(function(){
 		}
 		console.log("page.length:"+page.length);
 		if(page.length>2 && page[2].length>0)
+		{
 			$('#'+page[2]).show();
+			item_select($(this).attr("href"));
+		}
 		$(".dropbtn").removeClass("title_bt_active");
 		$(".d_c_a").removeClass("d_c_a_active");
 
@@ -265,22 +287,7 @@ $(function(){
 		{
 
 			$('#'+urls[2]).show();
-			var li_a = $("#item_ul").find("a");
-			var cur_lia = "a[href='"+hash+"']";
-
-			for(i=0;i<li_a.length;i++)
-			{
-				console.log($(li_a[i]).attr("href"));
-				if($(li_a[i]).attr("href")==hash)
-				{
-					var parent = $(li_a[i]).parents(".item_ul2");
-
-					$(parent).show();
-					$(li_a[i]).addClass("item_r_a_active");
-
-
-				}
-			}
+			item_select(hash);
 
 
 		}
