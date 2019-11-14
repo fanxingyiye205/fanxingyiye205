@@ -3,208 +3,10 @@
 <head>
 	<title>上海昌智知识产权代理有限公司</title>
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
-
-
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 	<script src="./js/jquery-2.1.4.min.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="css/mstyle.css" />
-	
-
-	<script>
-		$(function(){
-			function imgchange()
-			{
-				var img = $("#title_img").find("img");
-				console.log(img);
-				for(i=0;i<3;i++)
-				{
-					if($(img[i]).hasClass("img_show")){
-						$(img[i]).removeClass("img_show");
-						break;
-					}
-				}
-				i = i+1;
-				console.log(i);
-				if(i==3)
-					i=0;
-				$(img[i]).addClass("img_show");
-			}
-			//setInterval(imgchange,5000);
-
-			function imgpolling()
-			{
-				var polling_time = 3000;
-				var timeout;
-				var img1_left = 0;
-				var imglist = $("#title_img").find("img");
-				var img_w = $(imglist[0]).width();
-				var time1 ;
-				var imgname=["1.jpg","2.jpg","3.jpg"];
-
-				function resetimgcircle()
-				{
-					var cur_src = $(imglist[1]).attr("src");
-					var index = 0;
-					for(i=0;i<3;i++)
-					{
-						if(cur_src.indexOf(imgname[i])>=0)
-						{
-							index=i;
-							break;
-						}
-					}
-					var imgc_list = $(".img_circle").find(".img_c");
-					for(i=0;i<imgc_list.length;i++)
-						$(imgc_list[i]).removeClass("img_c_select");
-					$(imgc_list[index]).addClass("img_c_select");
-				}
-
-				function resetimgsrc(flag)
-				{
-					var curimg_src = "";
-					if(flag==1)
-					{
-						curimg_src = $(imglist[2]).attr("src")
-					}
-					else if(flag==-1)
-					{
-						curimg_src = $(imglist[0]).attr("src")
-					}
-					var imgpath = "";
-					var img_index =0;
-					for(i=0;i<3;i++)
-					{
-						if(curimg_src.indexOf(imgname[i])>=0)
-						{
-							img_index = i;
-							imgpath = curimg_src.substring(0,curimg_src.indexOf(imgname[i]));
-							console.log("imgpath:"+imgpath);
-							break;
-						}
-					}
-					var preimg_i=0;
-					var nextimg_i = 0;
-
-					if(img_index-1<0)
-						preimg_i=2;
-					else
-						preimg_i=(img_index-1);
-					if(img_index+1>2)
-						nextimg_i=0;
-					else
-						nextimg_i=(img_index+1);
-
-
-					$(imglist[0]).attr("src",imgpath+imgname[preimg_i]);
-					$(imglist[0]).attr("style","margin-left:-25%");
-					$(imglist[1]).attr("src",imgpath+imgname[img_index]);
-					$(imglist[1]).attr("style","margin-left:0");
-
-					$(imglist[2]).attr("src",imgpath+imgname[nextimg_i]);
-
-					resetimgcircle();
-				}
-
-				function polling_left()
-				{
-
-					time1=setInterval(function()
-					{
-						if((img_w+img1_left)<=0)
-						{
-							resetimgsrc(1);
-							clearInterval(time1);
-							clearTimeout(timeout);
-							img1_left = 0;
-							timeout = setTimeout(polling_left,polling_time);
-						}
-						else
-						{
-							img1_left-=10;
-							var str = "margin-left:"+img1_left+"px";
-							$(imglist[1]).attr("style",str)
-						}
-
-					},1);
-				}
-				timeout = setTimeout(polling_left,polling_time);
-
-				var x= 0;
-				var y=0;
-				var mleft=0;
-
-				$("#title_img").mousedown(function(event){ 
-					x = event.pageX;
-					y = event.pageY;
-					clearInterval(time1);
-					$("#title_img").mousemove(function(event){
-						mleft = event.pageX-x;
-
-						if(mleft>0)
-						{
-							var img0_mleft=-$(imglist[0]).width()+(mleft);
-							var str2="margin-left:"+img0_mleft+"px";
-							$(imglist[0]).attr("style",str2);
-						}
-						else
-						{
-							var str = "margin-left:"+mleft+"px";
-							$(imglist[1]).attr("style",str);
-						}
-					});
-				});
-				$("#title_img").mouseup(function(event){
-					var newX = event.pageX;
-					$("#title_img").off('mousemove')
-
-					var time2 = setInterval(function(){
-						if(newX<x)
-						{
-							if((img_w+mleft)<=0)
-							{
-								resetimgsrc(1);
-								clearInterval(time2);
-								clearTimeout(timeout);
-								timeout = setTimeout(polling_left,polling_time);
-							}
-							else
-							{
-								mleft-=10;
-								var str = "margin-left:"+mleft+"px";
-
-								$(imglist[1]).attr("style",str)
-							}
-
-						}
-						else if(newX>x)
-						{
-							if(img_w-mleft<=0)
-							{
-								resetimgsrc(-1);
-								clearInterval(time2);
-								clearTimeout(timeout);
-								timeout = setTimeout(polling_left,polling_time);
-							}
-							else
-							{
-								mleft+=10;
-								var img0_mleft=-$(imglist[0]).width()+(mleft);
-								var str2="margin-left:"+img0_mleft+"px";
-								$(imglist[0]).attr("style",str2);
-
-							}
-						}
-
-					},1);
-				});
-			}
-			imgpolling();
-		})
-
-
-	</script>
+	<link rel="stylesheet" type="text/css" href="css/mstyle.css?v=20191114" />
+	<script src="./js/mscript.js?v=20191114"></script>
 
 </head>
 <body>
@@ -213,37 +15,37 @@
 			<div style="margin-top: 10px;height: 34px;line-height: 35px;">一站式综合服务</div>
 			<div style="margin-bottom:10px ">上海昌智知识产权代理有限公司</div>
 		</div>
-		<div style="float: left;margin-left:100px;">
+		<div class="title">
 			<div class="title_phone" style="height: 40px">
 				<span>TEL:400-886-553</span>
 			</div>
-			<div class="title_bt title_bt_active">
-				<span>首页</span>
+			<div class="title_bt">
+				<a href="#home"><div class="dropbtn">首页</div></a>
 			</div>
 			<div class="dropdown">
-				<a href="./gxrd/"><div class="dropbtn">高薪认定</div></a>
+				<a href="#gxrd"><div class="dropbtn">高薪认定</div></a>
 				<div class="dropdown-content">
-					<a href="./">加计扣除</a>
+					<a href="#">加计扣除</a>
 				</div>
 			</div>	
 			<div class="title_bt">
-				<a href="./gbrd/"><span>贯标认定</span></a>
+				<a href="#gbrd"><div class="dropbtn">贯标认定</div></a>
 			</div>
 			<div class="dropdown">
-				<a href="./zscq/"><div class="dropbtn">知识产权服务</div></a>
+				<a href="#zscq"><div class="dropbtn">知识产权服务</div></a>
 				<div class="dropdown-content">
-					<a href="./">版权服务</a>
-					<a href="./zscq/sbfw/">商标服务</a>
+					<a class="d_c_a" href="">版权服务</a>
+					<a class="d_c_a " href="#zscq_sbfw">商标服务</a>
 				</div>
 			</div>
 			<div class="title_bt">
-				<span>双软认证</span>
+				<a href=""><div class="dropbtn">双软认证</div></a>
 			</div>
 			<div class="title_bt">
-				<span>科技政策扶持</span>
+				<a href=""><div class="dropbtn">科技政策扶持</div></a>
 			</div>	
 			<div class="title_bt">
-				<a href="./item/index.html#list_01"><span>关于我们</span></a>
+				<a href="#item#list01"><div class="dropbtn">关于我们</div></a>
 			</div>
 		</div>
 	</div>
@@ -268,313 +70,1294 @@
 			</a>
 		</div>
 	</div>
-	<div class="zscqfw">
-		<div class="zscqfw_left"> 
-			<div class="zscqfw_title">
-				<img src="./images/zscqfw/title.jpg" />
-				<span>知识产权服务</span>	
+	<div mid="home">
+		<div class="zscqfw">
+			<div class="zscqfw_left"> 
+				<div class="zscqfw_title">
+					<img src="./images/zscqfw/title.jpg" />
+					<span>知识产权服务</span>	
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/1.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>集成电路布图</span>
+					</div>
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/2.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>计算机软件著作权</span>
+					</div>
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/3.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>各类版权</span>
+					</div>
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/4.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>商标注册</span>
+					</div>
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/5.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>商标设计</span>
+					</div>
+				</div>
+				<div class="zscqfw_content">
+					<div class="zscqfw_content_img">
+						<img src="./images/zscqfw/6.jpg"/>
+					</div>
+					<div class="zscqfw_content_span">
+						<span>商标续展</span>
+					</div>
+				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/1.jpg"/>
+		</div>
+		<div class="fw_proc">
+			<div class="fw_proc_title">
+				<span>服务流程</span>
+			</div>
+			<div class="fw_proc_content">
+				<div class="fw_proc_c1">
+					<div class="fw_proc_img">
+						<img src="./images/fw_proc1.png" />
+					</div>
+					<div class="fw_proc_text">
+						<span>意向需求</span>
+					</div>
 				</div>
-				<div class="zscqfw_content_span">
-					<span>集成电路布图</span>
+				<div class="fw_proc_c2">
+					<span>></span>
+				</div>
+				<div class="fw_proc_c1">
+					<div class="fw_proc_img">
+						<img src="./images/fw_proc1.png" />
+					</div>
+					<div class="fw_proc_text">
+						<span>项目审查</span>
+					</div>
+				</div>
+				<div class="fw_proc_c2">
+					<span>></span>
+				</div>
+				<div class="fw_proc_c1">
+					<div class="fw_proc_img">
+						<img src="./images/fw_proc1.png" />
+					</div>
+					<div class="fw_proc_text">
+						<span>签订合同</span>
+					</div>
+				</div>
+				<div class="fw_proc_c2">
+					<span>></span>
+				</div>
+				<div class="fw_proc_c1">
+					<div class="fw_proc_img">
+						<img src="./images/fw_proc1.png" />
+					</div>
+					<div class="fw_proc_text">
+						<span>完成交易</span>
+					</div>
+				</div>
+				<div class="fw_proc_c2">
+					<span>></span>
+				</div>
+				<div class="fw_proc_c1">
+					<div class="fw_proc_img">
+						<img src="./images/fw_proc1.png" />
+					</div>
+					<div class="fw_proc_text">
+						<span>售后服务</span>
+					</div>
 				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/2.jpg"/>
-				</div>
-				<div class="zscqfw_content_span">
-					<span>计算机软件著作权</span>
+		</div>
+		<div class="kjzcfc">
+			<div class="kjzcfc_title">
+				<span>科技政策扶持</span>
+			</div>
+			<div class="k_left">
+				<div class="k_left_content">
+					<div class="k_text_1">
+						<span>专属担保注册
+						</span>
+					</div>
+					<div class="k_text_2">
+						<span>专属担保注册,不成功退全款(含官费)
+						</span>
+					</div>
+					<div class="k_bt_1">
+						<span>了解详情
+						</span>
+					</div>
+					<div class="k_img">
+						<img src="./images/k1.jpg" />
+					</div>
 				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/3.jpg"/>
-				</div>
-				<div class="zscqfw_content_span">
-					<span>各类版权</span>
+			<div class="k_right">
+				<div class="k_right_content">
+					<div class="k_r_d">
+						<div class="k_r_t_div" >
+							<div class="k_r_div" style="margin-left: 0px;">
+								<div class="k_text_1">
+									<span>专属顾问注册</span>
+								</div>
+								<div class="k_text_2">
+									<span>企业品牌保护的开始</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k2.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="k_r_t_div">
+							<div class="k_r_div">
+								<div class="k_text_1">
+									<span>专属加急注册</span>
+								</div>
+								<div class="k_text_2">
+									<span>加急服务，快速递交</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k3.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="k_r_t_div" >
+							<div class="k_r_div" style="margin-right: 0px;">
+								<div class="k_text_1">
+									<span>商标法律服务</span>
+								</div>
+								<div class="k_text_2">
+									<span>商标驳回复审，商标异议</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k4.jpg" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="k_r_d">
+						<div class="k_r_b_div" >
+							<div class="k_r_div" style="margin-left: 0px;">
+								<div class="k_text_1">
+									<span>马德里国际商标</span>
+								</div>
+								<div class="k_text_2">
+									<span>更加快捷方式进入多国市场</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k5.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="k_r_b_div">
+							<div class="k_r_div">
+								<div class="k_text_1">
+									<span>欧盟商标注册</span>
+								</div>
+								<div class="k_text_2">
+									<span>迅速打入欧洲市场</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k6.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="k_r_b_div" >
+							<div class="k_r_div" style="margin-right: 0px;">
+								<div class="k_text_1">
+									<span>商标其他服务</span>
+								</div>
+								<div class="k_text_2">
+									<span>商标变更，商标许可备案</span>
+								</div>
+								<div class="k_bt_1">
+									<span>了解详情
+									</span>
+								</div>
+								<div class="k_img">
+									<img src="./images/k7.jpg" />
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/4.jpg"/>
+		</div>
+		<div class="sb_process">
+			<div class="sb_process_text">
+				<span>申报流程</span>
+			</div>
+			<div style="text-align: center;">
+				<img style="width: 90%;" src="./images/p1.jpg" />
+			</div>
+		</div>
+		<div class="server">
+			<div class="server_text">
+				<span>服务优势</span>
+			</div>
+			<div class="server_div">
+				<div class="server_img">
+					<img   src="./images/s1.png" />
 				</div>
-				<div class="zscqfw_content_span">
-					<span>商标注册</span>
+				<div class="server_t1">
+					<span >服务标准</span>
+				</div>
+				<div class="server_t2">
+					<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
 				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/5.jpg"/>
+			<div class="server_div">
+				<div class="server_img">
+					<img   src="./images/s1.png" />
 				</div>
-				<div class="zscqfw_content_span">
-					<span>商标设计</span>
+				<div class="server_t1">
+					<span >进度可视</span>
+				</div>
+				<div class="server_t2">
+					<span >采用公开透明的服务流程<br>实施了解案件的进展<br>工作内容一目了然</span>
 				</div>
 			</div>
-			<div class="zscqfw_content">
-				<div class="zscqfw_content_img">
-					<img src="./images/zscqfw/6.jpg"/>
+			<div class="server_div">
+				<div class="server_img">
+					<img   src="./images/s1.png" />
 				</div>
-				<div class="zscqfw_content_span">
-					<span>商标续展</span>
+				<div class="server_t1">
+					<span >官费代缴</span>
+				</div>
+				<div class="server_t2">
+					<span >免费代缴各类专利官费<br>足不出户完成专利的申请与管理<br>贴心为您服务</span>
+				</div>
+			</div>
+			<div class="server_div">
+				<div class="server_img">
+					<img   src="./images/s1.png" />
+				</div>
+				<div class="server_t1">
+					<span >退款承诺</span>
+				</div>
+				<div class="server_t2">
+					<span >平台为大众创新保驾护航<br>并承诺不授权退款<br>服务价廉质更优</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="fw_proc">
-		<div class="fw_proc_title">
-			<span>服务流程</span>
+
+	<div mid="zscq" >
+		<div class="zscq_zl_s">
+			<div class="zscq_zl_s_title">
+				<span>专利服务</span>
+			</div>
+			<div class="zscq_zl_s_context">
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">发明专利</span>
+						<span class="s_title2">保护产品创新 含金量高 专利价值最大</span>
+						<span class="s_title3">产品、方法</span>
+					</span>
+				</div>
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">实用新型专利</span>
+						<span class="s_title2">保护结构形状创新 风险小、周期短</span>
+						<span class="s_title3">形状、图案</span>
+					</span>
+				</div>
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">外观专利</span>
+						<span class="s_title2">保护产品独特设计 投资少、回报快</span>
+						<span class="s_title3">形状、图案</span>
+					</span>
+				</div>
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">软件著作权</span>
+						<span class="s_title2">最快可加急3个工作日，100%保证下证书，免费办理补助，无材料可代编</span>
+						<span class="s_title3">产品、方法</span>
+					</span>
+				</div>
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">作品著作权</span>
+						<span class="s_title2">最快积极当天可出证，保护文字作品、摄影作品、美术作品等</span>
+						<span class="s_title3">产品、方法</span>
+					</span>
+				</div>
+				<div class="zl_s_context">
+					<span class="zl_s_img">
+						<img src="./images/gxjs/01.png"/>
+					</span>
+					<span class="zl_s_text">
+						<span class="s_title1">集成电路布图</span>
+						<span class="s_title2">保护布图设计，保护力度大</span>
+						<span class="s_title3">产品、方法</span>
+					</span>
+				</div>
+			</div>
 		</div>
-		<div class="fw_proc_content">
-			<div class="fw_proc_c1">
-				<div class="fw_proc_img">
-					<img src="./images/fw_proc1.png" />
+		<div class="zl_hc">
+			<div class="zl_hc_line1">
+				<div class="zl_hc_s" style="margin-top:100px;">
+					<div class="hc_m border_lime" >
+						<div class="hc_m_content">
+							<div class="hc_m_c_img">
+								<img src="./images/gxjs/h5.png" />
+							</div>
+							<div class="hc_m_c_title">
+								<span>无形资产</span>
+							</div>
+						</div>
+						<div class="hc_m_text">
+							<span>可出售、转让、质押，可估值作价，可授权他人使用，从而收取费用。</span>
+						</div>
+					</div>
+					<div class="hc_top border_lime"></div>
+					<div class="hc_bottom border_lime"></div>
 				</div>
-				<div class="fw_proc_text">
-					<span>意向需求</span>
+				<div class="zl_hc_s">
+					<div class="hc_m border_teal">
+						<div class="hc_m_content">
+							<div class="hc_m_c_img">
+								<img src="./images/gxjs/h5.png" />
+							</div>
+							<div class="hc_m_c_title">
+								<span>资质提升</span>
+							</div>
+						</div>
+						<div class="hc_m_text">
+							<span>申请高新技术企业，企业资质提升到必须条件。</span>
+						</div>
+					</div>
+					<div class="hc_top border_teal"></div>
+					<div class="hc_bottom border_teal"></div>
+				</div>
+				<div class="zl_hc_s" style="margin-top:100px;">
+					<div class="hc_m border_red">
+						<div class="hc_m_content">
+							<div class="hc_m_c_img">
+								<img src="./images/gxjs/h5.png" />
+							</div>
+							<div class="hc_m_c_title">
+								<span>享受政策</span>
+							</div>
+						</div>
+						<div class="hc_m_text ">
+							<span>可享受国家新政策，政府专项资金、税收减免。</span>
+						</div>
+					</div>
+					<div class="hc_top border_red"></div>
+					<div class="hc_bottom border_red"></div>
 				</div>
 			</div>
-			<div class="fw_proc_c2">
-				<span>></span>
-			</div>
-			<div class="fw_proc_c1">
-				<div class="fw_proc_img">
-					<img src="./images/fw_proc1.png" />
+			<div class="zl_hc_line2">
+				<div class="zl_hc_s">
+					<div class="hc_m border_green" >
+						<div class="hc_m_content">
+							<div class="hc_m_c_img">
+								<img src="./images/gxjs/h5.png" />
+							</div>
+							<div class="hc_m_c_title">
+								<span>独占市场</span>
+							</div>
+						</div>
+						<div class="hc_m_text">
+							<span>独立拥有产品全线，通过知识产权跑马圈地。</span>
+						</div>
+					</div>
+					<div class="hc_top border_green"></div>
+					<div class="hc_bottom border_green"></div>
 				</div>
-				<div class="fw_proc_text">
-					<span>项目审查</span>
+				<div class="zl_hc_center">
+					<div class="circle">
+						<div class="circle_text">
+							<span>知识产权的好处</span>
+						</div>
+					</div>
+				</div>
+				<div class="zl_hc_s">
+					<div class="hc_m border_fuchsia">
+						<div class="hc_m_content">
+							<div class="hc_m_c_img">
+								<img src="./images/gxjs/h5.png" />
+							</div>
+							<div class="hc_m_c_title">
+								<span>品牌宣传</span>
+							</div>
+						</div>
+						<div class="hc_m_text ">
+							<span>提升企业信息，提升品牌的附加值。</span>
+						</div>
+					</div>
+					<div class="hc_top border_fuchsia"></div>
+					<div class="hc_bottom border_fuchsia"></div>
 				</div>
 			</div>
-			<div class="fw_proc_c2">
-				<span>></span>
-			</div>
-			<div class="fw_proc_c1">
-				<div class="fw_proc_img">
-					<img src="./images/fw_proc1.png" />
-				</div>
-				<div class="fw_proc_text">
-					<span>签订合同</span>
-				</div>
-			</div>
-			<div class="fw_proc_c2">
-				<span>></span>
-			</div>
-			<div class="fw_proc_c1">
-				<div class="fw_proc_img">
-					<img src="./images/fw_proc1.png" />
-				</div>
-				<div class="fw_proc_text">
-					<span>完成交易</span>
+			<div class="zl_hc_line3">
+				<div class="zl_hc_c_jt">
+					<div class="jt_item1">
+						<img src="./images/zscq/left.png" />
+					</div>
+					<div class="jt_item2">
+						<img src="./images/zscq/left.png" />
+					</div>
+					<div class="jt_item3">
+						<img src="./images/zscq/top.png" />
+					</div>
+					<div class="jt_item4">
+						<img src="./images/zscq/right.png" />
+					</div>
+					<div class="jt_item5">
+						<img src="./images/zscq/right.png" />
+					</div>
+
 				</div>
 			</div>
-			<div class="fw_proc_c2">
-				<span>></span>
+		</div>
+		<div class="sq_zscq">
+			<div class="sq_zscq_title">
+				<span>何时申请知识产权</span>
 			</div>
-			<div class="fw_proc_c1">
-				<div class="fw_proc_img">
-					<img src="./images/fw_proc1.png" />
+			<div class="sq_zscq_content">
+				<div class="sq_content_item">
+					<div class="sq_item_img">
+						<img src="./images/gxjs/h5.png"/>
+					</div>
+					<div class="sq_item_text">
+						<span>在会议提交交稿前</span>
+					</div>
+					<div class="sq_item_text2">
+						<span>（有6个月的新颖性宽限期）</span>
+					</div>
 				</div>
-				<div class="fw_proc_text">
-					<span>售后服务</span>
+				<div class="sq_content_item">
+					<div class="sq_item_img">
+						<img src="./images/gxjs/h5.png"/>
+					</div>
+					<div class="sq_item_text">
+						<span>在发表文章前</span>
+					</div>
+
+				</div>
+				<div class="sq_content_item">
+					<div class="sq_item_img">
+						<img src="./images/gxjs/h5.png"/>
+					</div>
+					<div class="sq_item_text">
+						<span>在与客户或友商沟通前</span>
+					</div>
+
+				</div>
+				<div class="sq_content_item">
+					<div class="sq_item_img">
+						<img src="./images/gxjs/h5.png"/>
+					</div>
+					<div class="sq_item_text">
+						<span>在投放市场前</span>
+					</div>
+
+				</div>
+				<div class="sq_content_item">
+					<div class="sq_item_img">
+						<img src="./images/gxjs/h5.png"/>
+					</div>
+					<div class="sq_item_text">
+						<span>在理论上设计基本成行前</span>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="kjzcfc">
-		<div class="kjzcfc_title">
-			<span>科技政策扶持</span>
+	<div mid="zscq_sbfw" >
+		<div>
+			<h1 class="sbfw_zc_type_title1">商标注册类型 <em>/ type</em></h1>
+			<p class="sbfw_zc_type_title2">用来区别一个经营者的品牌或服务和其他经营者的商品或服务的标记</p>
+			<ul class="sbfw_zc_type_ul">
+				<li>
+					<h2>商标国内注册</h2>
+					<i></i>
+					<p>商标是用来区别一个经营者的品牌或服务和其他经营者的商品或服务的标记。任何能够将自然人、法人或者其他组织的商品与他人的商品区别开的标志，包括文字、图形、字母、数字、三维标志、颜色组合和声音等，以及上述要素的组合，均可以作为商标申请注册。</p>
+				</li>
+				<li>
+					<h2>商标国际注册</h2>
+					<i></i>
+					<p>申请人到国外申请注册商标有两种途径，一种是逐一国家注册，即分别向各国商标主管机关申请注册；一种是马德里商标国际注册，即根据《商标国际注册马德里协定》或《商标国际注册马德里协定有关议定书》的规定，在马德里联盟成员国间所进行的商标注册。</p>
+				</li>
+				<li>
+					<h2>马德里国际商标注册</h2>
+					<i></i>
+					<p>马德里体系是一商标国际注册体系，它受两个条约约束：1891年签订的商标国际注册马德里协定和1989年通过的商标国际注册马德里协定有关议定书。后者的订立是为了使马德里体系更加灵活，更能适应某些未能加入马德里协定的国家的国内立法。</p>
+				</li>
+			</ul>
 		</div>
-		<div class="k_left">
-			<div class="k_left_content">
-				<div class="k_text_1">
-					<span>专属担保注册
-					</span>
+		<div class="sbfw_zc_proc">
+			<h1 class="sbfw_zc_proc_title1">商标注册流程<em>/ PROCESS</em></h1>
+			<p class="sbfw_zc_proc_title2">把简单留给客户，把复杂的留给我们</p>
+			<ul class="sbfw_zc_proc_ul">
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p1.png" alt="">
+					<p class="cye-lm-tag">01.客服人员接受客户咨询</p>
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p2.png" alt="">
+					<p class="cye-lm-tag">02.安排专业代理人与客户沟通</p>
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p3.png" alt="">
+					<p class="cye-lm-tag">03.根据客户过往的商标注册、使用记录，分析客户的商标保护漏洞 </p>
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p4.png" alt="">
+					<p class="cye-lm-tag">04.根据客户的主营业务，结合商标分类标准，确定核心类似群</p>
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p5.png" alt="">
+					<p class="cye-lm-tag">08.申请完成</p>
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p6.png" alt="">
+					<p class="cye-lm-tag">07.给出商标注册建议</p>
+
+				</li>
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p7.png" alt="">
+					<p class="cye-lm-tag">06.检索结果审核（资深代理人）</p>
+				</li>
+
+				<li>
+					<img src="./images/zscq/sbfw/sbfu_p8.png" alt="">
+					<p class="cye-lm-tag">05.在先冲突商标检索（代理人1）</p>
+				</li>
+
+			</ul>
+		</div>
+		<div class="sbfw_zc_patent">
+			<h1 class="sbfw_zc_patent_title1">商标注册4大理由<em>/ PCT PATENT</em></h1>
+			<p class="sbfw_zc_patent_title2">当你需要与人竞争时，—— 您的商标保护了吗？</p>
+			<ul class="sbfw_zc_patent_ul">
+				<li>
+					<h2>品牌创建</h2>
+					<p class="p">区别商品或服务出处 丨 引导消费者认牌消费的习惯 丨 商业影响力至关重要的地位。</p>
+				</li>
+				<li>
+					<h2>品牌保护</h2>
+					<p class="p">有利于保护公司无形资产 丨 避免行业内恶性竞争 丨 防止同品类企业侵权</p>
+				</li>
+				<li>
+					<h2>必备资质</h2>
+					<p class="p">企业拓展网络营销宣传面及消费市场入驻电商平台的资质要求</p>
+				</li>
+				<li>
+					<h2>无形资产</h2>
+					<p class="p">选择具有新颖创意的商标注册具有非常高的经济利益 丨 商标可作为无形资产进行质押贷款</p>
+				</li>
+			</ul>
+			<div class="good">
+				<img src="./images/zscq/sbfw/sbfu_good.png" alt="">
+			</div>
+		</div>
+	</div>
+	
+	<div mid="gxrd">
+		<div class="gxrd_gj">
+			<div class="gxrd_gj_title">
+				<span>国家重点支持高科技技术领域</span>
+			</div>
+			<div class="gxrd_gj_context" style="height: 280px">
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/01.png"/>
+					</div>
+					<div class="gj_text">
+						<span>生物与新医药</span>
+					</div>
 				</div>
-				<div class="k_text_2">
-					<span>专属担保注册,不成功退全款(含官费)
-					</span>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/02.png"/>
+					</div>
+					<div class="gj_text">
+						<span>电子信息</span>
+					</div>
 				</div>
-				<div class="k_bt_1">
-					<span>了解详情
-					</span>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/03.png"/>
+					</div>
+					<div class="gj_text">
+						<span>电子信息</span>
+					</div>
 				</div>
-				<div class="k_img">
-					<img src="./images/k1.jpg" />
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/04.png"/>
+					</div>
+					<div class="gj_text">
+						<span>电子信息</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/05.png"/>
+					</div>
+					<div class="gj_text">
+						<span>资源与环境</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/06.png"/>
+					</div>
+					<div class="gj_text">
+						<span>电子信息</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/07.png"/>
+					</div>
+					<div class="gj_text">
+						<span>电子信息</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/08.png"/>
+					</div>
+					<div class="gj_text">
+						<span>航空航天</span>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="k_right">
-			<div class="k_right_content">
-				<div class="k_r_d">
-					<div class="k_r_t_div" >
-						<div class="k_r_div" style="margin-left: 0px;">
-							<div class="k_text_1">
-								<span>专属顾问注册</span>
-							</div>
-							<div class="k_text_2">
-								<span>企业品牌保护的开始</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k2.jpg" />
-							</div>
-						</div>
+		<div class="gxrd_hc">
+			<h2 class="gxrd_hc_title">
+				高企认定<span>10大好处</span>——先了解，再申报
+			</h2>
+			<div class="gxrd_hc_content">
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h1.jpg"/>
 					</div>
-					<div class="k_r_t_div">
-						<div class="k_r_div">
-							<div class="k_text_1">
-								<span>专属加急注册</span>
-							</div>
-							<div class="k_text_2">
-								<span>加急服务，快速递交</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k3.jpg" />
-							</div>
-						</div>
-					</div>
-					<div class="k_r_t_div" >
-						<div class="k_r_div" style="margin-right: 0px;">
-							<div class="k_text_1">
-								<span>商标法律服务</span>
-							</div>
-							<div class="k_text_2">
-								<span>商标驳回复审，商标异议</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k4.jpg" />
-							</div>
-						</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
 					</div>
 				</div>
-				<div class="k_r_d">
-					<div class="k_r_b_div" >
-						<div class="k_r_div" style="margin-left: 0px;">
-							<div class="k_text_1">
-								<span>马德里国际商标</span>
-							</div>
-							<div class="k_text_2">
-								<span>更加快捷方式进入多国市场</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k5.jpg" />
-							</div>
-						</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h2.jpg"/>
 					</div>
-					<div class="k_r_b_div">
-						<div class="k_r_div">
-							<div class="k_text_1">
-								<span>欧盟商标注册</span>
-							</div>
-							<div class="k_text_2">
-								<span>迅速打入欧洲市场</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k6.jpg" />
-							</div>
-						</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
 					</div>
-					<div class="k_r_b_div" >
-						<div class="k_r_div" style="margin-right: 0px;">
-							<div class="k_text_1">
-								<span>商标其他服务</span>
-							</div>
-							<div class="k_text_2">
-								<span>商标变更，商标许可备案</span>
-							</div>
-							<div class="k_bt_1">
-								<span>了解详情
-								</span>
-							</div>
-							<div class="k_img">
-								<img src="./images/k7.jpg" />
-							</div>
-						</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h3.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h4.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h5.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h6.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h7.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h8.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h9.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
+					</div>
+				</div>
+				<div class="hc_content">
+					<div class="hc_img">
+						<img src="./images/gxjs/h10.jpg"/>
+					</div>
+					<div class="hc_text">
+						<span class="hc_t1">优先拨款</span>
+						<span class="hc_t2">最高200万拨款</span>
 					</div>
 				</div>
 
 			</div>
 		</div>
+
+		<div class="become_wrap">
+			<p class="beTitle"><img src="./images/gxjs/become.png"></p>
+			<p class="twoTitle">满足8个条件，你也可以成为高新企业</p>
+			<ul class="clearfix">
+				<li style="margin-left:25px;" class="">
+					<p class="be1">成立<br>年限</p>
+					<b style="display: block;"></b>
+				</li>
+				<li class="">
+					<p class="be2">知识<br>产权</p>
+					<b></b>
+				</li>
+				<li class="">
+					<p class="be3">八大<br>领域</p>
+					<b></b>
+				</li>
+				<li class="">
+					<p class="be4">人员<br>比例</p>
+					<b></b>
+				</li>
+				<li class="hover">
+					<p class="be5">研发<br>费用比例</p>
+					<b></b>
+				</li>
+				<li>
+					<p class="be6">高新<br>收入比例</p>
+					<b></b>
+				</li>
+				<li>
+					<p class="be7">创新<br>能力</p>
+					<b></b>
+				</li>
+				<li>
+					<p class="be8">无重大<br>事故</p>
+					<b></b>
+				</li>
+			</ul>
+			<ol>
+				<li class="hover" style="display: list-item;">
+					<p class="number"><img src="./images/gbrd/1.png"></p>
+					<div>
+						<h5 style="line-height: 180px">企业申请认定时须注册成立1年以上。</h5>
+						<p></p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/2.png"></p>
+					<div>
+						<h5 style="line-height: 50px;margin-top: 60px;">企业通过自主研发、受让、受赠、并购等获得对其主要产品（服务）在技术上发挥核心支持作用的知识产权。</h5>
+						<p></p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/3.png"></p>
+					<div>
+						<h5 style="margin-top: 70px;">主要产品（服务）的技术属于《国家重点支持的高新技术领域》规定的8大范围：</h5>
+						<p>电子信息、生物与新医药、航天航空、新材料、高技术服务业、新能源及节能技术、资源与环境、先进制造与自动化</p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/4.png"></p>
+					<div>
+						<h5 style="margin-top: 50px;">企业从事研发和相关技术创新活动的科技人员占职工总数的比例不低于10%</h5>
+						<p>新办法由现行“科技人员占企业当年职工总数的30%以上”调整为“科技人员占企业当年职工总数的比例不低于10%”，同时取消了“大学专科以上学历”的限制；取消“研发人员占企业当年职工总数的10%以上”的规定。对于部分传统行业的大型企业而言，是一大利好。</p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/5.png"></p>
+					<div>
+						<h5>企业近三个会计年度（不足3年按实际经营期限计算）的研究开发费用总额占同期销售收入总额<br>的比例符合要求</h5>
+						<p>最近一年销售收入小于5,000万元（含）的企业，比例不低于5%；</p>
+						<p>最近一年销售收入在5,000万元至2亿元（含）的企业，比例不低于4%；</p>
+						<p>最近一年销售收入在2亿元以上的企业，比例不低于3%。</p>
+						<p>境内研发费用占总研发费用≥60%</p>
+						<p>新办法取消6%的比例规定，意在鼓励中小企业的科技创新和发展</p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/6.png"></p>
+					<div>
+						<h5 style="line-height: 180px">近一年高新技术产品（服务）收入占企业同期总收入的比例≥60%</h5>
+						<p></p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/7.png"></p>
+					<div>
+						<h5 style="margin-top: 70px;">企业创新能力评价达到相应要求</h5>
+						<p>包含四个指标：自主知识产权、研究开发的组织管理水平、科技成果转化能力、成长性指标。四项指标采取加权记分方式，须达到70分以上（不包括70）。</p>
+					</div>
+				</li>
+				<li style="display: none;">
+					<p class="number"><img src="./images/gbrd/8.png"></p>
+					<div>
+						<h5 style="line-height: 180px">企业申请认定前一年内未发生重大安全、重大质量事故或严重环境违法行为。</h5>
+						<p></p>
+					</div>
+				</li>
+			</ol>
+		</div>
+		<div class="gx_proc">
+			<div class="gx_proc_title">
+				<span>高薪技术企业的申报流程</span>
+			</div>
+			<div class="gx_proc_content">
+				<div class="gx_proc_img">
+				</div>
+				<div class="gx_proc_text">
+					<div class="gx_proc_text1" style="margin-left:-35px; ">
+						<span>线上咨询</span>
+					</div>
+					<div class="gx_proc_text2" style="margin-left:-35px; ">
+						<span>专心、耐心、细致的服务</span>
+					</div>
+				</div>
+				<div class="gx_proc_text">
+					<div class="gx_proc_text1" style="margin-left:-15px; ">
+						<span>专业顾问<br>科学诊断</span>
+					</div>
+					<div class="gx_proc_text2" style="margin-left:-15px; ">
+						<span>专业顾问<br>一对一服务，科学诊断</span>
+					</div>
+				</div>
+				<div class="gx_proc_text">
+					<div class="gx_proc_text1">
+						<span>确认合作关<br>系签订合同</span>
+					</div>
+					<div class="gx_proc_text2">
+						<span>专心、耐心、细致的服务</span>
+					</div>
+				</div>
+				<div class="gx_proc_text">
+					<div class="gx_proc_text1" style="margin-left:15px; ">
+						<span>材料准备<br>认定申请</span>
+					</div>
+					<div class="gx_proc_text2" style="margin-left:15px; ">
+						<span>系统话的资料整理流程</span>
+					</div>
+				</div>
+				<div class="gx_proc_text">
+					<div class="gx_proc_text1" style="margin-left:35px; ">
+						<span>认定后服务<br>跟踪管理</span>
+					</div>
+					<div class="gx_proc_text2" style="margin-left:35px; ">
+						<span>对条件欠缺的企业<br>开展分阶段培训</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cj_quest">
+			<div class="cj_quest_title">
+				<span>常见问题:</span>
+			</div>
+			<div class="cj_quest_content">
+				<div class="cj_quest_q">
+					<span>Q:&nbsp;高新技术企业的年限？</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>A:&nbsp;高薪技术企业认定成功后，每三年进行一次复审。复审所需要提交的资料可参考新神曲所需资料内容。</span>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="sb_process">
-		<div class="sb_process_text">
-			<span>申报流程</span>
+
+	<div mid="gbrd">
+		<div class="gbrd_hc">
+			<div class="gbrd_hc_title">
+				<span>知识产权管理体系贯标8大好处</span>
+			</div>
+			<div class="gbrd_hc_context">
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/01.png"/>
+					</div>
+					<div class="gj_text">
+						<span>拨款资助</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/02.png"/>
+					</div>
+					<div class="gj_text">
+						<span>高企认证的重要参考条件</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/03.png"/>
+					</div>
+					<div class="gj_text">
+						<span>入围政府采购名单，优先享受政府购买服务</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/04.png"/>
+					</div>
+					<div class="gj_text">
+						<span>申请高级别自制项目的必须条件</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/05.png"/>
+					</div>
+					<div class="gj_text">
+						<span>鼓励大企业优先采购认证企业产品</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/06.png"/>
+					</div>
+					<div class="gj_text">
+						<span>承研承制单位必须体系认证</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/07.png"/>
+					</div>
+					<div class="gj_text">
+						<span>帮助企业建立知识产权绩效管理体系</span>
+					</div>
+				</div>
+				<div class="gj_context">
+					<div class="gj_img">
+						<img src="./images/gxjs/08.png"/>
+					</div>
+					<div class="gj_text">
+						<span>确保企业员工对知识产权方针和目标理解</span>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div style="text-align: center;">
-			<img style="width: 90%;" src="./images/p1.jpg" />
+		<div class="gbrd_fw">
+			<div class="gbrd_hc_title">
+				<span>我们的服务</span>
+			</div>
+			<div class="gbrd_fw_content">
+				<div class="fw_left">
+					<img class="fw_left_img" src="./images/gbrd/fw1.png"/>
+					<div class="fw_left_text">
+						<span >贯标申请基础服务</span>
+					</div>
+				</div>
+				<div class="fw_center">
+					<span class="fw_c_item">服务特色</span>
+					<span class="fw_c_i2">每个项目配备专属专家团队提供专业认证辅导</span>
+					<div class="fw_c_desc">
+						<span class="fw_c_item">服务清单</span>
+						<div class="fw_c_list">
+							<span class="fw_c_i3"><em class="fw_c_i_em">1</em>贯标启动（上门1次）</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">5</em>认证申请</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">2</em>体系文件编写</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">6</em>文审整改</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">3</em>运行辅导（上门1次）</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">7</em>模拟审核（上门1次）</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">4</em>内审管评（上门1次）</span>
+							<span class="fw_c_i3"><em class="fw_c_i_em">8</em>不符合整改</span>
+						</div>
+					</div>
+					<span class="fw_c_item">适用对象</span>
+					<span class="fw_c_i2">凡是希望强化知识产权管理的大中小微企业均可申请</span>
+				</div>
+				<div class="fw_right">
+					<button class="fw_r_bt" type="button">免费询问</button>
+				</div>
+			</div>
+		</div>
+		<div class="gbrd_fw_p">
+			<div class="gbrd_fw_p_title">
+				<span>知识产权贯标具体服务流程</span>
+			</div>
+			<div class="gbrd_fw_p_content">
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p1.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>启动培训会议</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>成立专家项目组，筹备指导启动会</span>
+					</div>
+				</div>
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p2.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>现场调查诊断</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>入驻企业内部调查，出具诊断报告文件</span>
+					</div>
+				</div>
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p3.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>管理体系建设</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>协助构建管理体系，知道编撰体系文件</span>
+					</div>
+				</div>
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p4.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>试运行管理体系</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>知道培训企业员工，协助企业实施运行</span>
+					</div>
+				</div>
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p5.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>内审/管评</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>开展企业内部评审，及时协助解决问题</span>
+					</div>
+				</div>
+				<div class="fw_p_item">
+					<img class="" src="./images/gbrd/p6.jpg" />
+
+					<div class="fw_p_i_t1">
+						<span>贯标认证</span>
+					</div>
+					<div class="fw_p_i_line"></div>
+					<div class="fw_p_i_t2">
+						<span>为企业建立快速认证通道，帮助认证直至成功</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="gbrd_cmp">
+			<div class="gbrd_cmp_title">
+				<span>企业知识产权<p>贯标前后对比</p></span>
+			</div>
+			<div class="gbrd_cmp_l">
+				<div class="gbrd_cmp_text1">
+					<span>企业贯标前</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>专利单一性</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>分工不明</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>执行力不够</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>配合乏力</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>制度不完善</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>课题组</span>
+				</div>
+			</div>
+			<div class="gbrd_cmp_r">
+				<div class="gbrd_cmp_text1">
+					<span>企业贯标后</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>专利多样性</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>分工明确</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>执行高效</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>配合给力</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>制度完善</span>
+				</div>
+				<div class="gbrd_cmp_text2">
+					<span>全员参与</span>
+				</div>
+			</div>
+		</div>
+		<div class="cj_quest">
+			<div class="cj_quest_title">
+				<span>常见问题:</span>
+			</div>
+			<div class="cj_quest_content">
+				<div class="cj_quest_q">
+					<span>Q:&nbsp;《企业知识产权规范》适用哪些公司</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>A:&nbsp;该国家标准适用有下列愿景的企业：</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>&nbsp;&nbsp;&nbsp;(1)建立知识产权管理体系。</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>&nbsp;&nbsp;&nbsp;(2)运行并持续改进知识产权管理体系。</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>&nbsp;&nbsp;&nbsp;(3)寻求外部组织对知识产权管理体系的评价</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>&nbsp;各级知识产权试点、示范、优势企业，高薪技术企业，创新性企业都有必须要通过贯标简历和完善自身的知识产权管理体系。</span>
+				</div>
+
+				<div class="cj_quest_q">
+					<span>Q:&nbsp;企业为什么要开展知识产权贯标工作？</span>
+				</div>
+				<div class="cj_quest_a">
+					<span>A:&nbsp;知识产权工作除了可以促进企业技术创新，提升企业核心竞争力，改善企业市场竞争地位外，一些中央部位和地方政府出台的政策文件中，已经将项目立项，以及高薪技术企业、知识产权示范企业认定的重要参考条件，及早通过贯标认定，将有利于企业享受有关的过肩政策，加快企业发展。</span>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="server">
-		<div class="server_text">
-			<span>服务优势</span>
-		</div>
-		<div class="server_div">
-			<div class="server_img">
-				<img   src="./images/s1.png" />
+
+	<div mid="item">
+		<div class="item_content">
+			<div class="item_title">
 			</div>
-			<div class="server_t1">
-				<span >服务标准</span>
+			<div class="item_l">
+				<ul id="item_ul">
+					<li class="item_li1"><a href="#item#list01">高薪企业认定 &nbsp;〉</a></li>
+					<li class="item_li1"><a>政府资助 &nbsp;〉</a>
+						<ul class="item_ul2">
+							<li><a href="#item#list02">创客资助 &nbsp;〉</a>
+							</li>
+							<li><a href="#item#list03">创业资助 &nbsp;〉</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
-			<div class="server_t2">
-				<span >专业服务指标具体化<br>客观评价专利服务<br>不花冤枉钱</span>
+			<div class="item_r">
+				<div id="list01">
+					<div class="item_r_title">
+						<span>高新技术企业认定</span>
+					</div>
+					<div class="item_r_content">
+						<p>国家高新技术企业又称国家级高新技术企业，根据《高新技术企业认定管理办法》规定，国家高新技术企业是指在《国家重点支持的高新技术领域》内，持续进行研究开发与技术成果转化，形成企业核心自主知识产权，并以此为基础开展经营活动，在中国境内（不包括港、澳、台地区）注册一年以上的居民企业。深圳地区的科技型成长型企业，也可申请深圳高新技术企业认定。 如果企业申请的国家高新企业认定或者深圳高新企业认定超过三年时间，可以进行申请高新复审。</p>
+					</div>
+				</div>
+				<div id="list02">
+					<div class="item_r_title">
+						<span>创客资助</span>
+					</div>
+					<div class="item_r_content">
+						<p> 一、创客创业资助审批内容</p>
+						<p class="cp_2">中国创新创业大赛、中国（深圳）创新创业大赛、全国农业科技创新创业大赛竞赛等优胜者在深圳实施竞赛项目的资助以及创客企业的资助</p>
+					</div>
+				</div>
+				<div id="list03">
+					<div class="item_r_title">
+						<span>创业资助</span>
+					</div>
+					<div class="item_r_content">
+						<p><b>创业资助金额：</b></p>
+						<p class="cp_2">单个项目资助最高不超过<span class="span_red">100万</span>。</p>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="server_div">
-			<div class="server_img">
-				<img   src="./images/s1.png" />
-			</div>
-			<div class="server_t1">
-				<span >进度可视</span>
-			</div>
-			<div class="server_t2">
-				<span >采用公开透明的服务流程<br>实施了解案件的进展<br>工作内容一目了然</span>
-			</div>
-		</div>
-		<div class="server_div">
-			<div class="server_img">
-				<img   src="./images/s1.png" />
-			</div>
-			<div class="server_t1">
-				<span >官费代缴</span>
-			</div>
-			<div class="server_t2">
-				<span >免费代缴各类专利官费<br>足不出户完成专利的申请与管理<br>贴心为您服务</span>
-			</div>
-		</div>
-		<div class="server_div">
-			<div class="server_img">
-				<img   src="./images/s1.png" />
-			</div>
-			<div class="server_t1">
-				<span >退款承诺</span>
-			</div>
-			<div class="server_t2">
-				<span >平台为大众创新保驾护航<br>并承诺不授权退款<br>服务价廉质更优</span>
-			</div>
+
 		</div>
 	</div>
+
 	<div class="fotter">
 		<div class="fotter_1">
 			<span>版权所有 上海昌智知识产权代理有限公司 ©2012,Shanghai ChangZhi</span>
