@@ -5,8 +5,12 @@
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="./js/jquery-2.1.4.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/mstyle.css?v=20191114" />
-	<script src="./js/mscript.js?v=20191114"></script>
+	<script type="text/javascript">
+		var js = '<script src="./js/mscript.js?v='+new Date().getTime()+'" type="text/javascript" charset="utf-8"><\/script>';
+		var css = '<link rel="stylesheet" type="text/css" href="css/mstyle.css?v='+new Date().getTime()+'" />'
+		document.write(css);
+		document.write(js);
+	</script>
 
 </head>
 <body>
@@ -621,7 +625,7 @@
 		</div>
 	</div>
 	<div mid="zscq_sbfw" >
-		<div>
+		<div class="sbfw">
 			<h1 class="sbfw_zc_type_title1">商标注册类型 <em>/ type</em></h1>
 			<p class="sbfw_zc_type_title2">用来区别一个经营者的品牌或服务和其他经营者的商品或服务的标记</p>
 			<ul class="sbfw_zc_type_ul">

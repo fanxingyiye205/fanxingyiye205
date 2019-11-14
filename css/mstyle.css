@@ -1577,7 +1577,11 @@ h5{
 	margin-bottom: 50px; 
 }
 
-
+.sbfw
+{
+	width: 1180px;
+	margin: auto;
+}
 
 .sbfw_zc_type_title1,.sbfw_zc_proc_title1,.sbfw_zc_patent_title1
 {
@@ -1586,6 +1590,7 @@ h5{
 	font-size: 28px;
 	color: #363b3f;
 	line-height: 40px;
+	clear: both;
 }
 .sbfw_zc_type_title1 em,.sbfw_zc_proc_title1 em,.sbfw_zc_patent_title1 em
 {
