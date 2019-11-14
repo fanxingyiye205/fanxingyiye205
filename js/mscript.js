@@ -243,8 +243,10 @@ $(function(){
 		var urls = hash.split("#");
 		var url = "#"+urls[1];
 		console.log("url:"+url);
-		if(url.length<=0)
+		if(hash.length<=0){
+			hash="#home";
 			url="#home";
+		}
 		var item_a = $(".title").find("a");
 		for(var i=0;i<item_a.length;i++)
 		{
